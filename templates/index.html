@@ -162,6 +162,7 @@
       $(document).ready(function () {
         set_temp();
         listing();
+        getScore();
       });
 
       function set_temp() {
@@ -221,6 +222,47 @@
           },
         });
       }
+
+
+      function getScore() {
+        $.ajax({
+          type: "GET",
+          url: "/reviews",
+          data: {},
+          success: function (response) {
+            let rows = response["reviews"];
+            for (let i = 0; i < rows.length; i++) {
+              let review = rows[i]["opinion"];
+              let star = rows[i]["star"];
+              let star_img = "⭐".repeat(star);
+
+              let temp_html = `<p><a>${star_img}</a>
+                                <a>${review}</a><p/>`;
+              $("#reviewbox1").append(temp_html);
+            }
+          },
+        });
+      }
+
+      function listing() {
+        let sumScore = 0
+        $.ajax({
+          type: "GET",
+          url: "/reviews",
+          data: {},
+          success: function (response) {
+            let rows = response["reviews"];
+            for (let i = 0; i < rows.length; i++) {
+              let star = rows[i]["star"];
+              sumScore += Number(star)
+              Score = sumScore / rows.length
+            }
+            let Score_1 = parseFloat(Score).toFixed(2);
+            let star_img = "⭐".repeat(Score_1);
+            $("#score1").append(star_img, Score_1)
+          },
+        });
+      }
     </script>
   </head>
 
@@ -253,7 +295,7 @@
                 alt="..."
               />
               <div class="card-body">
-                <h5 class="card-title">T-Express</h5>
+                <h5 class="card-title">T-Express <a id="score1">평균점수</a></h5>
                 <p class="card-text">
                   This is description about T-express attraction in Everland.
                 </p>
