@@ -16,9 +16,11 @@ def home():
 def comments_post():
     opinion_value = request.form['opinion_value']
     star_value = request.form['star_value']
+    num_value = request.form['num_value']
     doc = {
         "star": star_value,
-        "opinion": opinion_value
+        "opinion": opinion_value,
+        "num": num_value
     }
     db.reviews.insert_one(doc)
     return jsonify({'msg':'작성 완료'})
