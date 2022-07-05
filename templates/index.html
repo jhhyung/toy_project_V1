@@ -121,6 +121,7 @@
         set_temp();
         listing();
         getScore();
+        get_star();
       });
 
       function set_temp() {
@@ -153,7 +154,7 @@
           },
         });
       }
-      //   {#listing 함수를 중복으로 만든 이유는?#}
+
       function listing() {
         $.ajax({
           type: "GET",
@@ -173,7 +174,8 @@
           },
         });
       }
-      function listing() {
+
+      function get_star() {
         let sumScore = 0;
         $.ajax({
           type: "GET",
@@ -192,6 +194,7 @@
           },
         });
       }
+
       function getScore() {
         $.ajax({
           type: "GET",
