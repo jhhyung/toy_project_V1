@@ -140,7 +140,7 @@
       function posting() {
         let opinion = $("#opinion1").val();
         let star = $("#star1").val();
-        let num = event.target.parentElement.lastElementChild.id[9];
+        let num = event.target.parentElement.lastElementChild.id[10];
         $.ajax({
           type: "POST",
           url: "/reviews",
@@ -171,7 +171,7 @@
 
               let temp_html = `<p><a>${star_img}</a>
                               <a>${review}</a><p/>`;
-              $(`#reviewbox${idnum}`).append(temp_html);
+              $(`#reviewbox_${idnum}`).append(temp_html);
             }
           },
         });
@@ -266,7 +266,7 @@
                 <button type="button" class="btn btn-light" onclick="posting()">
                   입력
                 </button>
-                <div class="review" id="reviewbox1">
+                <div class="review" id="reviewbox_1">
                   <a>별점</a>
                   <a>리뷰</a>
                 </div>
