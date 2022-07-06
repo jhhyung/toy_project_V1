@@ -120,7 +120,6 @@
       $(document).ready(function () {
         set_temp();
         listing();
-        getScore();
         get_star();
       });
 
@@ -141,12 +140,14 @@
       function posting() {
         let opinion = $("#opinion1").val();
         let star = $("#star1").val();
+        let num = event.target.parentElement.lastElementChild.id[10];
         $.ajax({
           type: "POST",
           url: "/reviews",
           data: {
             opinion_value: opinion,
             star_value: star,
+            num_value: num,
           },
           success: function (response) {
             alert(response["msg"]);
@@ -165,11 +166,12 @@
             for (let i = 0; i < rows.length; i++) {
               let review = rows[i]["opinion"];
               let star = rows[i]["star"];
+              let idnum = rows[i]["num"];
               let star_img = "⭐".repeat(star);
 
               let temp_html = `<p><a>${star_img}</a>
                               <a>${review}</a><p/>`;
-              $("#reviewbox1").append(temp_html);
+              $(`#reviewbox_${idnum}`).append(temp_html);
             }
           },
         });
@@ -195,25 +197,25 @@
         });
       }
 
-      function getScore() {
-        $.ajax({
-          type: "GET",
-          url: "/reviews",
-          data: {},
-          success: function (response) {
-            let rows = response["reviews"];
-            for (let i = 0; i < rows.length; i++) {
-              let review = rows[i]["opinion"];
-              let star = rows[i]["star"];
-              let star_img = "⭐".repeat(star);
+      // function getScore() {
+      //   $.ajax({
+      //     type: "GET",
+      //     url: "/reviews",
+      //     data: {},
+      //     success: function (response) {
+      //       let rows = response["reviews"];
+      //       for (let i = 0; i < rows.length; i++) {
+      //         let review = rows[i]["opinion"];
+      //         let star = rows[i]["star"];
+      //         let star_img = "⭐".repeat(star);
 
-              let temp_html = `<p><a>${star_img}</a>
-                              <a>${review}</a><p/>`;
-              $("#reviewbox1").append(temp_html);
-            }
-          },
-        });
-      }
+      //         let temp_html = `<p><a>${star_img}</a>
+      //                         <a>${review}</a><p/>`;
+      //         $("#reviewbox1").append(temp_html);
+      //       }
+      //     },
+      //   });
+      // }
     </script>
   </head>
 
@@ -264,10 +266,7 @@
                 <button type="button" class="btn btn-light" onclick="posting()">
                   입력
                 </button>
-                <div class="review" id="reviewbox1">
-                  <a>별점</a>
-                  <a>리뷰</a>
-                </div>
+                <div class="review" id="reviewbox_1"></div>
               </div>
             </div>
           </div>
