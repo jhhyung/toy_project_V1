@@ -1,5 +1,3 @@
-# from readline import read_init_file
-# 상단 라이브러리가 동작하지 않아 임시로 주석 처리했습니다
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
