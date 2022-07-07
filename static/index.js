@@ -45,7 +45,6 @@ function listing() {
     data: {},
     success: function (response) {
       let rows = response["reviews"];
-      console.log(rows);
       for (let i = 0; i < rows.length; i++) {
         let review = rows[i]["opinion"];
         let star = rows[i]["star"];
@@ -87,6 +86,7 @@ function get_star() {
         if (idnum == 1) {
           sumScore_1 += Number(star);
           count_1 += 1;
+          console.log(sumScore_1);
         } else if (idnum == 2) {
           sumScore_2 += Number(star);
           count_2 += 1;
@@ -142,15 +142,71 @@ function get_star() {
       $(`#score_6`).append(temp_star_6);
     },
   });
+  sumScore_1 = 0;
+  count_1 = 0;
+  sumScore_2 = 0;
+  count_2 = 0;
+  sumScore_3 = 0;
+  count_3 = 0;
+  sumScore_4 = 0;
+  count_4 = 0;
+  sumScore_5 = 0;
+  count_5 = 0;
+  sumScore_6 = 0;
+  count_6 = 0;
 }
 
-function PostCardBox() {
+function GetCardBox() {
+  let countnum = 2;
   $.ajax({
-    type: "POST",
-    url: "/PostCardBox",
+    type: "GET",
+    url: "/GetCardBox",
     data: {},
     success: function (response) {
       console.log(response);
+      for (let i = 0; i < rows.length; i++) {
+        let img = rows[i]["img"];
+        let subs = rows[i]["subs"];
+        let name = rows[i]["name"];
+
+        let temp_html = `<div class="col">
+                            <div class="card">
+                              <img
+                                src="${img}"
+                                class="card-img-top"
+                                alt="..."
+                              />
+                              <div class="card-body">
+                                <h5 class="card-title">
+                                  ${name} <a id="score_${countnum}">평균점수</a>
+                                </h5>
+                                <p class="card-text">
+                                  ${subs}
+                                </p>
+                                <select
+                                  class="form-select"
+                                  aria-label="Default select example"
+                                  id="star_${countnum}"
+                                >
+                                  <option selected>별점을 선택해주세요.</option>
+                                  <option value="1">⭐</option>
+                                  <option value="2">⭐⭐</option>
+                                  <option value="3">⭐⭐⭐</option>
+                                  <option value="4">⭐⭐⭐⭐</option>
+                                  <option value="5">⭐⭐⭐⭐⭐</option>
+                                </select>
+                                <input id="opinion_${countnum}" />
+                                <button type="button" class="btn btn-light" onclick="posting()">
+                                  입력
+                                </button>
+                                <div class="review" id="reviewbox_${countnum}"></div>
+                              </div>
+                            </div>
+                          </div>`;
+        $(`#cards-box`).append(temp_html);
+        countnum += 1;
+      }
+      countnum = 2;
     },
   });
 }
