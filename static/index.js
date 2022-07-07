@@ -1,0 +1,134 @@
+$(document).ready(function () {
+  set_temp();
+  listing();
+  get_star();
+});
+
+function set_temp() {
+  $.ajax({
+    type: "GET",
+    url: "http://spartacodingclub.shop/sparta_api/weather/chuncheon",
+    data: {},
+    success: function (response) {
+      $("#temp").text(response["temp"]);
+
+      let url = response["icon"];
+      $("#weather").attr("src", url);
+    },
+  });
+}
+
+function posting() {
+  let num = event.target.parentElement.lastElementChild.id[10];
+  let opinion = $(`#opinion_${num}`).val();
+  let star = $(`#star_${num}`).val();
+  $.ajax({
+    type: "POST",
+    url: "/reviews",
+    data: {
+      opinion_value: opinion,
+      star_value: star,
+      num_value: num,
+    },
+    success: function (response) {
+      alert(response["msg"]);
+      window.location.reload();
+    },
+  });
+}
+
+function listing() {
+  $.ajax({
+    type: "GET",
+    url: "/reviews",
+    data: {},
+    success: function (response) {
+      let rows = response["reviews"];
+      console.log(rows);
+      for (let i = 0; i < rows.length; i++) {
+        let review = rows[i]["opinion"];
+        let star = rows[i]["star"];
+        let idnum = rows[i]["num"];
+        let star_img = "⭐".repeat(star);
+
+        let temp_html = `<p><a>${star_img}</a>
+                            <a>${review}</a><p/>`;
+        $(`#reviewbox_${idnum}`).append(temp_html);
+      }
+    },
+  });
+}
+
+function get_star() {
+  // 카드박스마다 점수와 별을 붙여주는 함수
+  let sumScore_1 = 0;
+  let sumScore_2 = 0;
+  let sumScore_3 = 0;
+  let sumScore_4 = 0;
+  let sumScore_5 = 0;
+  let sumScore_6 = 0;
+
+  $.ajax({
+    type: "GET",
+    url: "/reviews",
+    data: {},
+    success: function (response) {
+      let rows = response["reviews"];
+      for (let i = 0; i < rows.length; i++) {
+        let star = rows[i]["star"];
+        let idnum = rows[i]["num"];
+        if (idnum == 1) {
+          sumScore_1 += Number(star);
+        } else if (idnum == 2) {
+          sumScore_2 += Number(star);
+        } else if (idnum == 3) {
+          sumScore_3 += Number(star);
+        } else if (idnum == 4) {
+          sumScore_4 += Number(star);
+        } else if (idnum == 5) {
+          sumScore_5 += Number(star);
+        } else if (idnum == 6) {
+          sumScore_6 += Number(star);
+        }
+      }
+
+      let score_1 = sumScore_1 / rows.length;
+      let getScore_1 = parseFloat(score_1).toFixed(2);
+      let star_img_1 = "⭐".repeat(getScore_1);
+      let temp_star_1 = `<a>${star_img_1} ${getScore_1}</a>`;
+      $(`#score_1`).append(temp_star_1);
+
+      let score_2 = sumScore_2 / rows.length;
+      let getScore_2 = parseFloat(score_2).toFixed(2);
+      let star_img_2 = "⭐".repeat(getScore_2);
+      let temp_star_2 = `<a>${star_img_2} ${getScore_2}</a>`;
+      $(`#score_2`).append(temp_star_2);
+
+      let score_3 = sumScore_3 / rows.length;
+      let getScore_3 = parseFloat(score_3).toFixed(2);
+      let star_img_3 = "⭐".repeat(getScore_3);
+      let temp_star_3 = `<a>${star_img_3} ${getScore_3}</a>`;
+      $(`#score_3`).append(temp_star_3);
+
+      let score_4 = sumScore_4 / rows.length;
+      let getScore_4 = parseFloat(score_4).toFixed(2);
+      let star_img_4 = "⭐".repeat(getScore_4);
+      let temp_star_4 = `<a>${star_img_4} ${getScore_4}</a>`;
+      $(`#score_4`).append(temp_star_4);
+
+      let score_5 = sumScore_5 / rows.length;
+      let getScore_5 = parseFloat(score_5).toFixed(2);
+      let star_img_5 = "⭐".repeat(getScore_5);
+      let temp_star_5 = `<a>${star_img_5} ${getScore_5}</a>`;
+      $(`#score_5`).append(temp_star_5);
+
+      let score_6 = sumScore_6 / rows.length;
+      let getScore_6 = parseFloat(score_6).toFixed(2);
+      let star_img_6 = "⭐".repeat(getScore_6);
+      let temp_star_6 = `<a>${star_img_6} ${getScore_6}</a>`;
+      $(`#score_6`).append(temp_star_6);
+    },
+  });
+}
+
+function show_attraction() {}
