@@ -2,6 +2,7 @@ $(document).ready(function () {
   set_temp();
   listing();
   get_star();
+  GetCardBox();
 });
 
 function set_temp() {
@@ -62,11 +63,17 @@ function listing() {
 function get_star() {
   // 카드박스마다 점수와 별을 붙여주는 함수
   let sumScore_1 = 0;
+  let count_1 = 0;
   let sumScore_2 = 0;
+  let count_2 = 0;
   let sumScore_3 = 0;
+  let count_3 = 0;
   let sumScore_4 = 0;
+  let count_4 = 0;
   let sumScore_5 = 0;
+  let count_5 = 0;
   let sumScore_6 = 0;
+  let count_6 = 0;
 
   $.ajax({
     type: "GET",
@@ -79,50 +86,56 @@ function get_star() {
         let idnum = rows[i]["num"];
         if (idnum == 1) {
           sumScore_1 += Number(star);
+          count_1 += 1;
         } else if (idnum == 2) {
           sumScore_2 += Number(star);
+          count_2 += 1;
         } else if (idnum == 3) {
           sumScore_3 += Number(star);
+          count_3 += 1;
         } else if (idnum == 4) {
           sumScore_4 += Number(star);
+          count_4 += 1;
         } else if (idnum == 5) {
           sumScore_5 += Number(star);
+          count_5 += 1;
         } else if (idnum == 6) {
           sumScore_6 += Number(star);
+          count_6 += 1;
         }
       }
 
-      let score_1 = sumScore_1 / rows.length;
+      let score_1 = sumScore_1 / count_1;
       let getScore_1 = parseFloat(score_1).toFixed(2);
       let star_img_1 = "⭐".repeat(getScore_1);
       let temp_star_1 = `<a>${star_img_1} ${getScore_1}</a>`;
       $(`#score_1`).append(temp_star_1);
 
-      let score_2 = sumScore_2 / rows.length;
+      let score_2 = sumScore_2 / count_2;
       let getScore_2 = parseFloat(score_2).toFixed(2);
       let star_img_2 = "⭐".repeat(getScore_2);
       let temp_star_2 = `<a>${star_img_2} ${getScore_2}</a>`;
       $(`#score_2`).append(temp_star_2);
 
-      let score_3 = sumScore_3 / rows.length;
+      let score_3 = sumScore_3 / count_3;
       let getScore_3 = parseFloat(score_3).toFixed(2);
       let star_img_3 = "⭐".repeat(getScore_3);
       let temp_star_3 = `<a>${star_img_3} ${getScore_3}</a>`;
       $(`#score_3`).append(temp_star_3);
 
-      let score_4 = sumScore_4 / rows.length;
+      let score_4 = sumScore_4 / count_4;
       let getScore_4 = parseFloat(score_4).toFixed(2);
       let star_img_4 = "⭐".repeat(getScore_4);
       let temp_star_4 = `<a>${star_img_4} ${getScore_4}</a>`;
       $(`#score_4`).append(temp_star_4);
 
-      let score_5 = sumScore_5 / rows.length;
+      let score_5 = sumScore_5 / count_5;
       let getScore_5 = parseFloat(score_5).toFixed(2);
       let star_img_5 = "⭐".repeat(getScore_5);
       let temp_star_5 = `<a>${star_img_5} ${getScore_5}</a>`;
       $(`#score_5`).append(temp_star_5);
 
-      let score_6 = sumScore_6 / rows.length;
+      let score_6 = sumScore_6 / count_6;
       let getScore_6 = parseFloat(score_6).toFixed(2);
       let star_img_6 = "⭐".repeat(getScore_6);
       let temp_star_6 = `<a>${star_img_6} ${getScore_6}</a>`;
@@ -131,4 +144,13 @@ function get_star() {
   });
 }
 
-function show_attraction() {}
+function PostCardBox() {
+  $.ajax({
+    type: "POST",
+    url: "/PostCardBox",
+    data: {},
+    success: function (response) {
+      console.log(response);
+    },
+  });
+}

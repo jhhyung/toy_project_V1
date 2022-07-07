@@ -1,3 +1,4 @@
+from email.policy import default
 import requests
 from bs4 import BeautifulSoup
 
@@ -16,3 +17,4 @@ for attr in attrs:
     img = attr.select_one('div.event-show-overview-page__item__image.event-show-overview-page__item__image.media-block__image > picture > img')['src']
     full_img = 'https://www.legoland.kr' + img
     print(full_img, title)
+
