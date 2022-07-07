@@ -21,6 +21,7 @@ function set_temp() {
 
 function posting() {
   let num = event.target.parentElement.lastElementChild.id[10];
+  console.log(num);
   let opinion = $(`#opinion_${num}`).val();
   let star = $(`#star_${num}`).val();
   $.ajax({
