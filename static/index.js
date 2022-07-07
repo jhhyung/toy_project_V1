@@ -21,7 +21,6 @@ function set_temp() {
 
 function posting() {
   let num = event.target.parentElement.lastElementChild.id[10];
-  console.log(num);
   let opinion = $(`#opinion_${num}`).val();
   let star = $(`#star_${num}`).val();
   $.ajax({
@@ -87,7 +86,6 @@ function get_star() {
         if (idnum == 1) {
           sumScore_1 += Number(star);
           count_1 += 1;
-          console.log(sumScore_1);
         } else if (idnum == 2) {
           sumScore_2 += Number(star);
           count_2 += 1;
@@ -161,14 +159,13 @@ function GetCardBox() {
   let countnum = 2;
   $.ajax({
     type: "GET",
-    url: "/GetCardBox",
+    url: "/legoland",
     data: {},
     success: function (response) {
-      console.log(response);
-      for (let i = 0; i < rows.length; i++) {
-        let img = rows[i]["img"];
-        let subs = rows[i]["subs"];
-        let name = rows[i]["name"];
+      for (let i = 0; i < response.contents.length; i++) {
+        let img = response["img"][i]["url"];
+        let subs = response["contents"][i]["contents"];
+        let name = response["title"][i]["title"];
 
         let temp_html = `<div class="col">
                             <div class="card">

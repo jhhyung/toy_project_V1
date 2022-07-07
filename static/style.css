@@ -2,9 +2,7 @@
   /*this font makes all texts in Capital*/
   font-family: "Bebas Neue", cursive;
 }
-.kr {
-  font-family: 'Noto Sans KR', sans-serif;
-}
+
 .header > button {
   float: right;
 
@@ -83,14 +81,7 @@
 .btn-light {
   margin: 0px 10px 0px 10px;
 }
-.card-body > select {
-  width: 300px;
-  height: 40px;
-}
-.card-body > input {
-  width: 300px;
-  height: 40px;
-}
+
 .card-title > a {
   margin-left: 40px;
 }

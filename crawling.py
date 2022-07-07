@@ -1,4 +1,3 @@
-import urllib3
 import requests
 from bs4 import BeautifulSoup
 
@@ -10,42 +9,27 @@ import certifi
 
 client = MongoClient('mongodb+srv://doha:doha@cluster0.ycsvn.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=certifi.where())
 db = client.dbsparta
-
-
 soup = BeautifulSoup(data.text, 'html.parser')
-
-
 imgs = soup.find_all(class_='event-show-overview-page__item__image media-block__image')
-
-
 
 for img in imgs :
     attr = img.img['data-src']
     url = 'https://www.legoland.kr/'
     url_img = url + attr
-    doc = {
-        'url': url_img
-    }
-    db.legoland.insert_one(doc)
 
-title = soup.find_all(class_="header--small")
+    title = soup.find_all(class_="header--small")
 
-for title1 in title:
-    doc = {
-        'title':title1.text
-    }
-    db.legoland.insert_one(doc)
+    for title1 in title:
 
-contents = soup.find_all(class_="media-block__content__text stack")
+        contents = soup.find_all(class_="media-block__content__text stack")
 
-for a in contents:
-    contents1 = a.p.text
-    doc = {
-        'contents': contents1
-    }
-    db.legoland.insert_one(doc)
-
-
-
+        for a in contents:
+            contents1 = a.p.text
+            doc = {
+                'url': url_img,
+                'contents': contents1,
+                'title': title1.text
+            }
+            db.legoland.insert_one(doc)
 
 
