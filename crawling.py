@@ -16,5 +16,3 @@ for attr in attrs:
     title = tag.text
     img = attr.select_one('div.event-show-overview-page__item__image.event-show-overview-page__item__image.media-block__image > picture > img')['src']
     full_img = 'https://www.legoland.kr' + img
-    print(full_img)
-    print(title)

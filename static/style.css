@@ -81,3 +81,7 @@
 .btn-light {
   margin: 0px 10px 0px 10px;
 }
+
+.card-title > a {
+  margin-left: 40px;
+}
