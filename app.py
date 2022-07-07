@@ -37,12 +37,7 @@ if __name__ == '__main__':
 
 @app.route("/GetCardBox", methods=["GET"])
 def GetCardBox():
-    review_list = list(db.reviews.find({},{'_id':False}))
-    return jsonify({'reviews': review_list})
-
-@app.route("/PostCardBox", methods=["POST"])
-def PostCardBox():
-    review_list = list(db.reviews.find({},{'_id':False}))
+    review_list = list(db.regoland.find({},{'_id':False}))
     return jsonify({'reviews': review_list})
 
 

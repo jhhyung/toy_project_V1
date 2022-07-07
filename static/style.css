@@ -75,9 +75,11 @@
   justify-content: center;
   align-items: center;
 }
+
 .color-gray {
   color: darkgray;
 }
+
 .btn-light {
   margin: 0px 10px 0px 10px;
 }
