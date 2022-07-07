@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
+import requests
+from bs4 import BeautifulSoup
+
 from pymongo import MongoClient
 import certifi
 client = MongoClient('mongodb+srv://doha:doha@cluster0.ycsvn.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=certifi.where())
@@ -18,7 +21,7 @@ def comments_post():
     doc = {
         "star": star_value,
         "opinion": opinion_value,
-        "num": num_value
+        "num": num_value,
     }
     db.reviews.insert_one(doc)
     return jsonify({'msg':'작성 완료'})
@@ -31,3 +34,5 @@ def upload_comments():
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
+
+
