@@ -126,7 +126,7 @@
       function set_temp() {
         $.ajax({
           type: "GET",
-          url: "http://spartacodingclub.shop/sparta_api/weather/yongin",
+          url: "http://spartacodingclub.shop/sparta_api/weather/chuncheon",
           data: {},
           success: function (response) {
             $("#temp").text(response["temp"]);
@@ -167,11 +167,49 @@
               let review = rows[i]["opinion"];
               let star = rows[i]["star"];
               let idnum = rows[i]["num"];
+              let title = rows[i]['title']
+              let img = rows[i]['img']
               let star_img = "⭐".repeat(star);
 
               let temp_html = `<p><a>${star_img}</a>
                               <a>${review}</a><p/>`;
               $(`#reviewbox_${idnum}`).append(temp_html);
+
+              let temp_attraction = `<div class="col">
+            <div class="card">
+              <img
+                src="${img}"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">
+                  ${title} <a id="score1">평균점수</a>
+                </h5>
+                <p class="card-text">
+                  This is description about T-express attraction in Everland.
+                </p>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  id="star1"
+                >
+                  <option selected>별점을 선택해주세요.</option>
+                  <option value="1">⭐</option>
+                  <option value="2">⭐⭐</option>
+                  <option value="3">⭐⭐⭐</option>
+                  <option value="4">⭐⭐⭐⭐</option>
+                  <option value="5">⭐⭐⭐⭐⭐</option>
+                </select>
+                <input id="opinion1" />
+                <button type="button" class="btn btn-light" onclick="posting()">
+                  입력
+                </button>
+                <div class="review" id="reviewbox_1"></div>
+              </div>
+            </div>
+          </div>`
+          $('#cards-box').append(temp_attraction)
             }
           },
         });
@@ -196,6 +234,9 @@
           },
         });
       }
+      function show_attraction() {
+
+      }
     </script>
   </head>
 
@@ -208,14 +249,14 @@
       <h1>Attraction Advisor</h1>
     </div>
     <div class="park-wrap">
-      <h2 class="park-name">Everland</h2>
+      <h2 class="park-name">Legoland</h2>
       <div class="weather-desc">
         <h3 class="color-gray">Today's weather is <span id="temp"></span>ºC</h3>
         <img id="weather" src="" />
       </div>
       <div class="card-wrap">
-        <div class="row row-cols-1 row-cols-md-3 g-3">
-          <div class="col"></div>
+        <div class="row row-cols-1 row-cols-md-3 g-3" id="cards-box">
+
           <div class="col">
             <div class="card">
               <img
