@@ -4,6 +4,7 @@ $(document).ready(function () {
 
   setTimeout(get_star, 100);
   setTimeout(listing, 100);
+  // setTimeout해서 다 끝난다음 나중에 실행되도록.
 });
 
 function set_temp() {
@@ -21,6 +22,7 @@ function set_temp() {
 }
 
 function posting() {
+  // 리뷰 받는함수
   let num = event.target.parentElement.lastElementChild.id[10];
   let opinion = $(`#opinion_${num}`).val();
   let star = $(`#star_${num}`).val();
@@ -40,6 +42,7 @@ function posting() {
 }
 
 function listing() {
+  // 리뷰남겨주는 함수
   $.ajax({
     type: "GET",
     url: "/reviews",
@@ -197,6 +200,7 @@ function get_star() {
 }
 
 function GetCardBox() {
+  // 카드박스 만드는 함수
   let countnum = 1;
   $.ajax({
     type: "GET",
