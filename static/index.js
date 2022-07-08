@@ -1,8 +1,9 @@
 $(document).ready(function () {
   set_temp();
-  listing();
-  get_star();
   GetCardBox();
+
+  setTimeout(get_star, 100);
+  setTimeout(listing, 100);
 });
 
 function set_temp() {
@@ -73,6 +74,12 @@ function get_star() {
   let count_5 = 0;
   let sumScore_6 = 0;
   let count_6 = 0;
+  let sumScore_7 = 0;
+  let count_7 = 0;
+  let sumScore_8 = 0;
+  let count_8 = 0;
+  let sumScore_9 = 0;
+  let count_9 = 0;
 
   $.ajax({
     type: "GET",
@@ -86,7 +93,6 @@ function get_star() {
         if (idnum == 1) {
           sumScore_1 += Number(star);
           count_1 += 1;
-          console.log(sumScore_1);
         } else if (idnum == 2) {
           sumScore_2 += Number(star);
           count_2 += 1;
@@ -102,6 +108,15 @@ function get_star() {
         } else if (idnum == 6) {
           sumScore_6 += Number(star);
           count_6 += 1;
+        } else if (idnum == 7) {
+          sumScore_7 += Number(star);
+          count_7 += 1;
+        } else if (idnum == 8) {
+          sumScore_8 += Number(star);
+          count_8 += 1;
+        } else if (idnum == 9) {
+          sumScore_9 += Number(star);
+          count_9 += 1;
         }
       }
 
@@ -140,8 +155,27 @@ function get_star() {
       let star_img_6 = "⭐".repeat(getScore_6);
       let temp_star_6 = `<a>${star_img_6} ${getScore_6}</a>`;
       $(`#score_6`).append(temp_star_6);
+
+      let score_7 = sumScore_7 / count_7;
+      let getScore_7 = parseFloat(score_7).toFixed(2);
+      let star_img_7 = "⭐".repeat(getScore_7);
+      let temp_star_7 = `<a>${star_img_7} ${getScore_7}</a>`;
+      $(`#score_7`).append(temp_star_7);
+
+      let score_8 = sumScore_8 / count_8;
+      let getScore_8 = parseFloat(score_8).toFixed(2);
+      let star_img_8 = "⭐".repeat(getScore_8);
+      let temp_star_8 = `<a>${star_img_8} ${getScore_8}</a>`;
+      $(`#score_8`).append(temp_star_8);
+
+      let score_9 = sumScore_9 / count_9;
+      let getScore_9 = parseFloat(score_9).toFixed(2);
+      let star_img_9 = "⭐".repeat(getScore_9);
+      let temp_star_9 = `<a>${star_img_9} ${getScore_9}</a>`;
+      $(`#score_9`).append(temp_star_9);
     },
   });
+
   sumScore_1 = 0;
   count_1 = 0;
   sumScore_2 = 0;
@@ -154,20 +188,25 @@ function get_star() {
   count_5 = 0;
   sumScore_6 = 0;
   count_6 = 0;
+  sumScore_7 = 0;
+  count_7 = 0;
+  sumScore_8 = 0;
+  count_8 = 0;
+  sumScore_9 = 0;
+  count_9 = 0;
 }
 
 function GetCardBox() {
-  let countnum = 2;
+  let countnum = 1;
   $.ajax({
     type: "GET",
-    url: "/GetCardBox",
+    url: "/legoland",
     data: {},
     success: function (response) {
-      console.log(response);
-      for (let i = 0; i < rows.length; i++) {
-        let img = rows[i]["img"];
-        let subs = rows[i]["subs"];
-        let name = rows[i]["name"];
+      for (let i = 0; i < response.contents.length; i++) {
+        let img = response["img"][i]["url"];
+        let subs = response["contents"][i]["contents"];
+        let name = response["title"][i]["title"];
 
         let temp_html = `<div class="col">
                             <div class="card">
@@ -178,7 +217,7 @@ function GetCardBox() {
                               />
                               <div class="card-body">
                                 <h5 class="card-title">
-                                  ${name} <a id="score_${countnum}">평균점수</a>
+                                  ${name} <a id="score_${countnum}">점수</a>
                                 </h5>
                                 <p class="card-text">
                                   ${subs}
@@ -195,10 +234,11 @@ function GetCardBox() {
                                   <option value="4">⭐⭐⭐⭐</option>
                                   <option value="5">⭐⭐⭐⭐⭐</option>
                                 </select>
-                                <input id="opinion_${countnum}" />
+                                <input class="reviewinput" id="opinion_${countnum}" />
                                 <button type="button" class="btn btn-light" onclick="posting()">
                                   입력
                                 </button>
+                                <hr>
                                 <div class="review" id="reviewbox_${countnum}"></div>
                               </div>
                             </div>
@@ -206,7 +246,7 @@ function GetCardBox() {
         $(`#cards-box`).append(temp_html);
         countnum += 1;
       }
-      countnum = 2;
+      countnum = 1;
     },
   });
 }

@@ -32,13 +32,16 @@ def upload_comments():
     review_list = list(db.reviews.find({},{'_id':False}))
     return jsonify({'reviews': review_list})
 
-if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
-
-@app.route("/GetCardBox", methods=["GET"])
+@app.route("/legoland", methods=["GET"])
 def GetCardBox():
-    review_list = list(db.regoland.find({},{'_id':False}))
-    return jsonify({'reviews': review_list})
+    contents_list = list(db.legoland.contents.find({},{'_id':False}))
+    img_list = list(db.legoland.img.find({},{'_id':False}))
+    title_list = list(db.legoland.title.find({},{'_id':False}))
+    return jsonify({
+        'contents': contents_list,
+        'img': img_list,
+        'title': title_list
+    })
 
 
 if __name__ == '__main__':

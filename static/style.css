@@ -81,3 +81,38 @@
 .btn-light {
   margin: 0px 10px 0px 10px;
 }
+
+.card-title > a {
+  margin-left: 40px;
+}
+
+.card {
+  height: 860px;
+  border-radius: 20px;
+}
+
+.card > img {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.reviewinput {
+  width: 330px;
+}
+
+.review {
+  overflow: auto;
+}
+
+.form-select {
+  width: 330px;
+}
+
+.btn {
+  margin-top: 5px;
+  padding: -3px 0px -3px 0px;
+}
+
+.btn:hover {
+  box-shadow: 1px 1px 1px 1px #999;
+}
