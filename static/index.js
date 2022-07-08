@@ -220,7 +220,7 @@ function GetCardBox() {
                                 alt="..."
                               />
                               <div class="card-body">
-                                <h5 class="card-title">
+                                <h5 class="card-title eng">
                                   ${name} <a id="score_${countnum}">점수</a>
                                 </h5>
                                 <p class="card-text">
@@ -239,7 +239,7 @@ function GetCardBox() {
                                   <option value="5">⭐⭐⭐⭐⭐</option>
                                 </select>
                                 <input class="reviewinput" id="opinion_${countnum}" />
-                                <button type="button" class="btn btn-light" onclick="posting()">
+                                <button type="button" class="btn btn-dark" onclick="posting()">
                                   입력
                                 </button>
                                 <hr>

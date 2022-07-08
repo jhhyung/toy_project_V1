@@ -1,8 +1,16 @@
 * {
-  /*this font makes all texts in Capital*/
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.eng {
   font-family: "Bebas Neue", cursive;
 }
-
+.card-body > h5 > a {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  line-height: 40px;
+  vertical-align: center;
+  text-align: right;
+}
 .header > button {
   float: right;
 
@@ -27,6 +35,7 @@
 
 .mytitle > h1 {
   font-size: 72px;
+  font-family: "Bebas Neue", cursive;
 }
 
 .mytitle {
@@ -81,7 +90,9 @@
 .btn-light {
   margin: 0px 10px 0px 10px;
 }
-
+.card-title {
+  font-size: 2em;
+}
 .card-title > a {
   margin-left: 40px;
 }
@@ -95,21 +106,21 @@
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
-
-.reviewinput {
-  width: 330px;
+.card-text {
+  height: 75px;
+  overflow-y: auto;
 }
-
+.reviewinput {
+  height: 38.13px;
+  max-width: 390px;
+  width: 95%;
+  margin-top: 15px;
+}
 .review {
   overflow: auto;
 }
 
-.form-select {
-  width: 330px;
-}
-
 .btn {
-  margin-top: 5px;
   padding: -3px 0px -3px 0px;
 }
 
